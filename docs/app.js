@@ -52,6 +52,12 @@ const LEDGER_ABI = [
 // Safety cap so a very long history does not flood the page / RPC.
 const MAX_HISTORY = 50;
 
+// Palette for the allocation donut, legend, and history stacked bars.
+// Colors are purely presentational; the numbers always come from the data.
+const PALETTE = ["#0052FF", "#2E9BFF", "#00C2FF", "#7C6CFF", "#00D1A9", "#FFB020", "#FF6B8A", "#8B9BB4"];
+const DONUT_R = 80;
+const DONUT_C = 2 * Math.PI * DONUT_R;
+
 const $ = (id) => document.getElementById(id);
 
 function shortHash(hash) {
@@ -131,6 +137,24 @@ function renderDecision(decision) {
     txEl.textContent = "not available";
   }
 
+  // Stat strip: universe size from the decision file (same source as the
+  // rationale text). Action chip mirrors needs_rebalance (HOLD / REBALANCE).
+  const universe = decision.data && typeof decision.data.universe_size === "number"
+    ? decision.data.universe_size
+    : (typeof decision.universe_size === "number" ? decision.universe_size : null);
+  $("stat-universe").textContent = universe === null ? "—" : String(universe);
+
+  const chip = $("decision-action");
+  if (decision.needs_rebalance === true) {
+    chip.textContent = "REBALANCE";
+    chip.className = "action-chip rebalance";
+  } else if (decision.needs_rebalance === false) {
+    chip.textContent = "HOLD";
+    chip.className = "action-chip hold";
+  } else {
+    chip.classList.add("hidden");
+  }
+
   const scores = decision.scores || {};
   const body = $("scores-body");
   body.replaceChildren();
@@ -148,15 +172,29 @@ function renderDecision(decision) {
   for (const sym of symbols) {
     const s = scores[sym] || {};
     const row = document.createElement("tr");
-    const fmt = (v) => (v === undefined || v === null ? "—" : String(v));
-    row.innerHTML = "";
-    const cells = [sym, fmt(s.total), fmt(s.momentum), fmt(s.multiplier), fmt(s.adoption), fmt(s.freshness)];
-    cells.forEach((text, i) => {
+    const tokenCell = document.createElement("td");
+    tokenCell.textContent = sym;
+    row.appendChild(tokenCell);
+    // Scores are 0–100, so the bar width maps directly to the value.
+    for (const key of ["total", "momentum", "multiplier", "adoption", "freshness"]) {
+      const v = s[key];
       const cell = document.createElement("td");
-      cell.textContent = text;
-      if (i > 0) cell.className = "num";
+      cell.className = "num score-cell";
+      const num = document.createElement("div");
+      num.className = "score-num";
+      num.textContent = (v === undefined || v === null) ? "—" : String(v);
+      cell.appendChild(num);
+      const n = Number(v);
+      if (Number.isFinite(n)) {
+        const bar = document.createElement("div");
+        bar.className = "score-bar";
+        const fill = document.createElement("span");
+        fill.style.width = `${Math.max(0, Math.min(100, n))}%`;
+        bar.appendChild(fill);
+        cell.appendChild(bar);
+      }
       row.appendChild(cell);
-    });
+    }
     body.appendChild(row);
   }
 }
@@ -167,12 +205,74 @@ function fmtNavPrice(nav) {
   return Number.isFinite(n) ? `$${n.toFixed(2)}` : String(nav.nav_price);
 }
 
+// Donut chart of the on-chain target weights (SVG, no chart library).
+// Segment angles come from the same bps values shown in the table.
+function renderDonut(weights) {
+  const svg = $("donut-svg");
+  svg.replaceChildren();
+  const NS = "http://www.w3.org/2000/svg";
+
+  const track = document.createElementNS(NS, "circle");
+  track.setAttribute("cx", "100");
+  track.setAttribute("cy", "100");
+  track.setAttribute("r", String(DONUT_R));
+  track.setAttribute("fill", "none");
+  track.setAttribute("stroke", "rgba(255,255,255,0.07)");
+  track.setAttribute("stroke-width", "32");
+  svg.appendChild(track);
+
+  let acc = 0;
+  weights.forEach(({ ticker, bps }, i) => {
+    const n = Number(bps);
+    if (!Number.isFinite(n) || n <= 0) return;
+    const frac = n / 10000;
+    const len = Math.max(0, frac * DONUT_C - 2); // small visual gap between segments
+    const seg = document.createElementNS(NS, "circle");
+    seg.setAttribute("cx", "100");
+    seg.setAttribute("cy", "100");
+    seg.setAttribute("r", String(DONUT_R));
+    seg.setAttribute("fill", "none");
+    seg.setAttribute("stroke", PALETTE[i % PALETTE.length]);
+    seg.setAttribute("stroke-width", "32");
+    seg.setAttribute("stroke-dasharray", `${len} ${DONUT_C - len}`);
+    seg.setAttribute("stroke-dashoffset", String(-acc));
+    const title = document.createElementNS(NS, "title");
+    title.textContent = `${ticker} ${bpsToPct(bps)}`;
+    seg.appendChild(title);
+    svg.appendChild(seg);
+    acc += frac * DONUT_C;
+  });
+
+  $("donut-holdings").textContent = String(weights.length);
+
+  const legend = $("donut-legend");
+  legend.replaceChildren();
+  weights.forEach(({ ticker, bps }, i) => {
+    const li = document.createElement("li");
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = PALETTE[i % PALETTE.length];
+    const name = document.createElement("span");
+    name.className = "legend-ticker";
+    name.textContent = ticker;
+    const pct = document.createElement("span");
+    pct.className = "legend-pct";
+    pct.textContent = bps === null ? "not available" : bpsToPct(bps);
+    li.append(swatch, name, pct);
+    legend.appendChild(li);
+  });
+  $("portfolio-viz").classList.remove("hidden");
+}
+
 function renderPortfolio(record, decision) {
   if (!record) {
     $("portfolio-empty").classList.remove("hidden");
+    $("stat-holdings").textContent = "—";
     return;
   }
   const weights = parseWeights(record);
+  $("stat-holdings").textContent = String(weights.length);
+  renderDonut(weights);
   const navBySymbol = {};
   // The decision file nests the price snapshot at data.snapshot
   // (top-level `snapshot` kept as a fallback for older files).
@@ -182,25 +282,46 @@ function renderPortfolio(record, decision) {
       if (entry && entry.symbol) navBySymbol[entry.symbol] = entry;
     }
   }
+  const maxBps = Math.max(1, ...weights.map((w) => Number(w.bps) || 0));
   const body = $("portfolio-body");
   body.replaceChildren();
-  for (const { ticker, bps } of weights) {
+  weights.forEach(({ ticker, bps }, i) => {
     const nav = navBySymbol[ticker];
     const row = document.createElement("tr");
-    const cells = [
-      ticker,
-      bps === null ? "not available" : bpsToPct(bps),
-      fmtNavPrice(nav),
-      nav && nav.source ? nav.source : "not available"
-    ];
-    cells.forEach((text, i) => {
-      const cell = document.createElement("td");
-      cell.textContent = text;
-      if (i > 0) cell.className = "num";
-      row.appendChild(cell);
-    });
+
+    const tickerCell = document.createElement("td");
+    const tickerWrap = document.createElement("span");
+    tickerWrap.className = "ticker-cell";
+    const dot = document.createElement("span");
+    dot.className = "legend-swatch";
+    dot.style.background = PALETTE[i % PALETTE.length];
+    tickerWrap.append(dot, document.createTextNode(ticker));
+    tickerCell.appendChild(tickerWrap);
+
+    const weightCell = document.createElement("td");
+    weightCell.className = "num";
+    weightCell.appendChild(document.createTextNode(bps === null ? "not available" : bpsToPct(bps)));
+    if (bps !== null && Number.isFinite(Number(bps))) {
+      const bar = document.createElement("div");
+      bar.className = "weight-bar";
+      const fill = document.createElement("span");
+      fill.style.width = `${(Number(bps) / maxBps) * 100}%`;
+      fill.style.background = PALETTE[i % PALETTE.length];
+      bar.appendChild(fill);
+      weightCell.appendChild(bar);
+    }
+
+    const priceCell = document.createElement("td");
+    priceCell.className = "num";
+    priceCell.textContent = fmtNavPrice(nav);
+
+    const sourceCell = document.createElement("td");
+    sourceCell.className = "num";
+    sourceCell.textContent = nav && nav.source ? nav.source : "not available";
+
+    row.append(tickerCell, weightCell, priceCell, sourceCell);
     body.appendChild(row);
-  }
+  });
   $("portfolio-table").classList.remove("hidden");
   $("portfolio-meta").textContent =
     `From on-chain record #${record.id} · ${fmtUtc(record.timestamp)} · recorded by ${record.agent}`;
@@ -232,12 +353,24 @@ function renderHistory(records) {
       .map(({ ticker, bps }) => `${ticker} ${bps === null ? "n/a" : bpsToPct(bps)}`)
       .join(" · ") || "not available";
 
+    // Stacked allocation bar — segment widths are the same on-chain bps.
+    const barEl = document.createElement("div");
+    barEl.className = "stacked-bar";
+    parseWeights(record).forEach(({ bps }, i) => {
+      const n = Number(bps);
+      if (!Number.isFinite(n) || n <= 0) return;
+      const span = document.createElement("span");
+      span.style.width = `${n / 100}%`;
+      span.style.background = PALETTE[i % PALETTE.length];
+      barEl.appendChild(span);
+    });
+
     const hashesEl = document.createElement("div");
     hashesEl.className = "hash";
     hashesEl.textContent =
       `nav ${shortHash(record.navSnapshotHash)} · rationale ${shortHash(record.rationaleHash)} · agent ${shortHash(record.agent)}`;
 
-    item.append(head, weightsEl, hashesEl);
+    item.append(head, weightsEl, barEl, hashesEl);
     list.appendChild(item);
   }
 }
