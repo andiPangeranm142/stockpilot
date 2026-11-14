@@ -94,10 +94,11 @@ Live dashboard: <https://andipangeranm142.github.io/stockpilot/>
 
 | Item | Status |
 | --- | --- |
-| `StockPilotLedger` on Base Sepolia | **Pending** — deployer wallet awaits testnet ETH from a faucet |
+| `StockPilotLedger` on Base Sepolia | **Live** — [0x13612a2571C091625db489458298a31c507F54a1](https://sepolia.basescan.org/address/0x13612a2571C091625db489458298a31c507F54a1) |
 | Deployer / agent wallet (testnet only) | `0xde897528DEC3E6de4CF52616F7b88c72FA8403eC` |
-| Contract address | TBD after deploy (then recorded in `agent/contract-address.txt` and `docs/config.js`) |
-| First on-chain rebalance | TBD after deploy |
+| Deploy tx | [0x6982044f…99662ad](https://sepolia.basescan.org/tx/0x6982044f4795ea3bda3267c1e2b68780d9cf989c5922c130829c0af7c99662ad) |
+| Contract address | `0x13612a2571C091625db489458298a31c507F54a1` (recorded in `agent/contract-address.txt` and `docs/config.js`) |
+| First on-chain rebalance | **Done 14 Nov 2026** — [0x5d682a98…d321b63a](https://sepolia.basescan.org/tx/0x5d682a98df168b8d348084c836195ec01f589ffb4a8ac79917627174d321b63a) (block 58472967, 8 holdings, `rebalanceCount` = 1, verified via `getLatest`) |
 
 Deploy once the wallet is funded (key in a mode-600 `.env` file outside
 this repo — never committed):

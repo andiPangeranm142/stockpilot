@@ -1,6 +1,6 @@
 {
-  "contract_address": null,
-  "contract_error": "contract address file not found: /home/hatch/workspace/base-stocks-maxxing/stockpilot/agent/contract-address.txt \u2014 the StockPilotLedger contract has not been deployed yet. Run with --dry-run, or deploy the contract and write its address to that file.",
+  "contract_address": "0x13612a2571C091625db489458298a31c507F54a1",
+  "contract_error": null,
   "data": {
     "excluded_count": 346,
     "excluded_tokens": [
@@ -1429,8 +1429,8 @@
       {
         "contract_address": "0xb2000000000000000000004884b426556b92883d",
         "multiplier": "1",
-        "nav_price": "109.55",
-        "nav_updated_at": "2026-11-13T22:59:40+00:00",
+        "nav_price": "109.5",
+        "nav_updated_at": "2026-11-14T00:33:43+00:00",
         "source": "api",
         "symbol": "MSTRc",
         "total_supply": "19419.97804302"
@@ -1496,7 +1496,7 @@
         "nav_updated_at": "2026-11-13T21:04:28+00:00",
         "source": "api",
         "symbol": "AMZNc",
-        "total_supply": "7684.50295316"
+        "total_supply": "7833.50295316"
       }
     ],
     "sources": {
@@ -1508,17 +1508,17 @@
   },
   "days_since_last_rebalance": null,
   "disclaimer": "Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
-  "drift_bps": 1418,
-  "dry_run": true,
+  "drift_bps": 1417,
+  "dry_run": false,
   "first_run": true,
-  "nav_snapshot_hash": "0xb37aeddf32acb39777ca4e90bb6632d3f35863496ac8e4a4a76ef0d26d2b604c",
+  "nav_snapshot_hash": "0xe929e1f9bfca1d8cd5608c42ef5db9e7cab6b8f7267560713cf6b9631ed66de9",
   "needs_rebalance": true,
   "onchain": null,
-  "rationale": "StockPilot rebalance decision \u2014 2026-11-13 23:59 UTC. Universe: 12 tokenized stocks with a fresh Chainlink NAV out of 358 listed tokens (346 excluded: no NAV or stale NAV \u2014 never priced from invented data). Top research scores (0-100; momentum 40%, dividend multiplier 20%, adoption 20%, freshness 20%): NVDAc 70.5, GOOGLc 68.2, SPCXc 65.9. Target portfolio (8 holdings, 30% cap, 5% min): NVDAc 14.2%, GOOGLc 13.7%, SPCXc 13.2%, MSTRc 12.8%, METAc 11.8%, AMZNc 11.6%, TSLAc 11.4%, AAPLc 11.3%. Drift vs on-chain target: 1418 bps (threshold 500 bps). Action: REBALANCE. Reasons: first run \u2014 no prior on-chain record; drift 1418 bps exceeds 500 bps threshold; universe changed vs on-chain target. Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
-  "rationale_hash": "0x0f74d327ec97acc9c3289846450a50dbb1e9cd5b2c6cbb024d599a8f7b386537",
+  "rationale": "StockPilot rebalance decision \u2014 2026-11-14 00:34 UTC. Universe: 12 tokenized stocks with a fresh Chainlink NAV out of 358 listed tokens (346 excluded: no NAV or stale NAV \u2014 never priced from invented data). Top research scores (0-100; momentum 40%, dividend multiplier 20%, adoption 20%, freshness 20%): NVDAc 70.5, GOOGLc 68.2, SPCXc 65.9. Target portfolio (8 holdings, 30% cap, 5% min): NVDAc 14.2%, GOOGLc 13.7%, SPCXc 13.2%, MSTRc 12.8%, METAc 11.8%, AMZNc 11.6%, TSLAc 11.4%, AAPLc 11.3%. Drift vs on-chain target: 1417 bps (threshold 500 bps). Action: REBALANCE. Reasons: first run \u2014 no prior on-chain record; drift 1417 bps exceeds 500 bps threshold; universe changed vs on-chain target. Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
+  "rationale_hash": "0xa05a8ee00fb20c5f3b11675a76bc8dcd424c89a3acd6d59ca32cb585584a0b53",
   "rebalance_reasons": [
     "first run \u2014 no prior on-chain record",
-    "drift 1418 bps exceeds 500 bps threshold",
+    "drift 1417 bps exceeds 500 bps threshold",
     "universe changed vs on-chain target"
   ],
   "scores": {
@@ -1529,26 +1529,26 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 2.9h ago"
+        "NAV updated 3.5h ago"
       ],
       "total": 56.34
     },
     "AMZNc": {
-      "adoption": 39.78,
+      "adoption": 40.4,
       "excluded_reason": null,
       "freshness": 100.0,
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 2.9h ago"
+        "NAV updated 3.5h ago"
       ],
-      "total": 57.96
+      "total": 58.08
     },
     "CRCLc": {
       "adoption": 0.29,
@@ -1557,10 +1557,10 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 1.7h ago"
+        "NAV updated 2.3h ago"
       ],
       "total": 50.06
     },
@@ -1571,10 +1571,10 @@
       "momentum": 50.0,
       "multiplier": 51.89,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0003771186767842 (>1.0 = reinvested distributions)",
         "log10(total_supply) rank in universe",
-        "NAV updated 8.4h ago"
+        "NAV updated 9.0h ago"
       ],
       "total": 68.25
     },
@@ -1585,10 +1585,10 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 1.3h ago"
+        "NAV updated 1.9h ago"
       ],
       "total": 50.0
     },
@@ -1599,10 +1599,10 @@
       "momentum": 50.0,
       "multiplier": 51.57,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0003137922895982 (>1.0 = reinvested distributions)",
         "log10(total_supply) rank in universe",
-        "NAV updated 2.9h ago"
+        "NAV updated 3.5h ago"
       ],
       "total": 58.91
     },
@@ -1613,10 +1613,10 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 2.9h ago"
+        "NAV updated 3.5h ago"
       ],
       "total": 51.13
     },
@@ -1627,10 +1627,10 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 1.0h ago"
+        "NAV updated 0.0h ago"
       ],
       "total": 63.99
     },
@@ -1641,10 +1641,10 @@
       "momentum": 50.0,
       "multiplier": 52.69,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0005379395763694 (>1.0 = reinvested distributions)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.4h ago"
+        "NAV updated 1.0h ago"
       ],
       "total": 70.54
     },
@@ -1655,10 +1655,10 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 1.5h ago"
+        "NAV updated 2.1h ago"
       ],
       "total": 51.37
     },
@@ -1669,10 +1669,10 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.3h ago"
+        "NAV updated 0.9h ago"
       ],
       "total": 65.87
     },
@@ -1683,36 +1683,36 @@
       "momentum": 50.0,
       "multiplier": 50.0,
       "notes": [
-        "neutral: fewer than 2 history points",
+        "neutral: history span under 24h",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 2.5h ago"
+        "NAV updated 3.0h ago"
       ],
       "total": 56.77
     }
   },
   "target_weights_bps": {
     "AAPLc": 1129,
-    "AMZNc": 1162,
+    "AMZNc": 1164,
     "GOOGLc": 1368,
     "METAc": 1181,
     "MSTRc": 1283,
-    "NVDAc": 1418,
-    "SPCXc": 1321,
+    "NVDAc": 1417,
+    "SPCXc": 1320,
     "TSLAc": 1138
   },
   "tickers_csv": "NVDAc,GOOGLc,SPCXc,MSTRc,METAc,AMZNc,TSLAc,AAPLc",
-  "timestamp": "2026-11-13T23:59:31.714832+00:00",
-  "tx_hash": null,
-  "tx_status": "dry-run: not submitted",
+  "timestamp": "2026-11-14T00:34:15.119287+00:00",
+  "tx_hash": "0x5d682a98df168b8d348084c836195ec01f589ffb4a8ac79917627174d321b63a",
+  "tx_status": "confirmed",
   "universe_changed": true,
   "weights_bps": [
-    1418,
+    1417,
     1368,
-    1321,
+    1320,
     1283,
     1181,
-    1162,
+    1164,
     1138,
     1129
   ]
