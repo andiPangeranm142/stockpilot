@@ -1,0 +1,16 @@
+# Foundry build outputs (contracts/)
+contracts/out/
+contracts/cache/
+contracts/lib/
+# NOTE: contracts/broadcast/ is intentionally NOT ignored — it keeps the
+# deploy history in the repo.
+
+# Secrets — NEVER commit these
+.env*
+*.key
+deployer.json
+
+# Python bytecode
+__pycache__/
+*.pyc
+.pytest_cache/

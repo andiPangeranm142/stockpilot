@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StockPilot — Agentic Stock Finance on Base</title>
+  <meta name="description" content="StockPilot: research-to-portfolio agent for Coinbase tokenized stocks on Base. Simulated paper portfolio — not investment advice." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>StockPilot</h1>
+      <p class="tagline">Research-to-portfolio agent for Coinbase tokenized stocks on Base</p>
+      <p><span class="badge">Base Sepolia testnet — simulated paper portfolio</span></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="contract-banner" class="banner hidden" role="status"></section>
+
+    <section class="card" id="status-card">
+      <h2>Network status</h2>
+      <p id="rpc-status" class="muted">Connecting to Base Sepolia RPC…</p>
+      <dl class="kv">
+        <div><dt>Network</dt><dd>Base Sepolia (chain ID 84532)</dd></div>
+        <div><dt>RPC</dt><dd id="rpc-url" class="mono">—</dd></div>
+        <div><dt>Latest block</dt><dd id="block-number" class="mono">—</dd></div>
+        <div><dt>Ledger contract</dt><dd id="contract-address" class="mono">—</dd></div>
+        <div><dt>Total rebalances</dt><dd id="rebalance-count">—</dd></div>
+      </dl>
+    </section>
+
+    <section class="card" id="portfolio-card">
+      <h2>Current target portfolio</h2>
+      <p id="portfolio-empty" class="muted hidden">No rebalances recorded yet — the agent runs on a schedule; check back soon.</p>
+      <table id="portfolio-table" class="hidden">
+        <thead>
+          <tr><th>Ticker</th><th>Target weight</th><th>Latest NAV price</th><th>Price source</th></tr>
+        </thead>
+        <tbody id="portfolio-body"></tbody>
+      </table>
+      <p id="portfolio-meta" class="muted small"></p>
+    </section>
+
+    <section class="card" id="decision-card">
+      <h2>Latest agent decision</h2>
+      <div id="decision-empty" class="muted">
+        Decision detail not available yet — the agent has not published a decision file.
+      </div>
+      <div id="decision-body" class="hidden">
+        <p id="decision-time" class="muted small"></p>
+        <p id="decision-rationale"></p>
+        <dl class="kv">
+          <div><dt>Drift vs current</dt><dd id="decision-drift">—</dd></div>
+          <div><dt>Rebalance needed</dt><dd id="decision-needs">—</dd></div>
+          <div><dt>NAV snapshot hash</dt><dd id="decision-nav-hash" class="mono">—</dd></div>
+          <div><dt>Rationale hash</dt><dd id="decision-rationale-hash" class="mono">—</dd></div>
+          <div><dt>On-chain tx</dt><dd id="decision-tx">—</dd></div>
+        </dl>
+        <h3>Token scores</h3>
+        <table>
+          <thead>
+            <tr><th>Token</th><th>Total</th><th>Momentum</th><th>Multiplier</th><th>Adoption</th><th>Freshness</th></tr>
+          </thead>
+          <tbody id="scores-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="history-card">
+      <h2>Rebalance history</h2>
+      <p id="history-empty" class="muted hidden">No rebalances recorded yet.</p>
+      <ol id="history-list" class="history"></ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>
+        <a id="footer-repo" href="https://github.com/andiPangeranm142/stockpilot">GitHub repository</a>
+        · <a id="footer-contract" href="https://sepolia.basescan.org">Ledger contract on BaseScan</a>
+        · <a href="https://base.org/stocksmaxxing">Base Stocks Maxxing Builder Quest</a>
+      </p>
+      <p class="disclaimer">Simulated paper portfolio — not investment advice. All figures shown come from the on-chain ledger and the agent's published decision file; nothing here is a live price feed or a trading recommendation.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
