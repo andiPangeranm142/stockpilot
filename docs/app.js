@@ -161,6 +161,12 @@ function renderDecision(decision) {
   }
 }
 
+function fmtNavPrice(nav) {
+  if (!nav || nav.nav_price === undefined || nav.nav_price === null) return "not available";
+  const n = Number(nav.nav_price);
+  return Number.isFinite(n) ? `$${n.toFixed(2)}` : String(nav.nav_price);
+}
+
 function renderPortfolio(record, decision) {
   if (!record) {
     $("portfolio-empty").classList.remove("hidden");
@@ -168,8 +174,11 @@ function renderPortfolio(record, decision) {
   }
   const weights = parseWeights(record);
   const navBySymbol = {};
-  if (decision && Array.isArray(decision.snapshot)) {
-    for (const entry of decision.snapshot) {
+  // The decision file nests the price snapshot at data.snapshot
+  // (top-level `snapshot` kept as a fallback for older files).
+  const snapshot = decision && (decision.snapshot || (decision.data && decision.data.snapshot));
+  if (Array.isArray(snapshot)) {
+    for (const entry of snapshot) {
       if (entry && entry.symbol) navBySymbol[entry.symbol] = entry;
     }
   }
@@ -181,7 +190,7 @@ function renderPortfolio(record, decision) {
     const cells = [
       ticker,
       bps === null ? "not available" : bpsToPct(bps),
-      nav && nav.nav_price !== undefined && nav.nav_price !== null ? String(nav.nav_price) : "not available",
+      fmtNavPrice(nav),
       nav && nav.source ? nav.source : "not available"
     ];
     cells.forEach((text, i) => {
