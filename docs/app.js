@@ -133,6 +133,13 @@ function renderDecision(decision) {
     a.textContent = shortHash(decision.tx_hash);
     a.className = "mono";
     txEl.replaceChildren(a);
+  } else if (decision.tx_status === "not needed") {
+    // HOLD decision: no transaction was sent because no rebalance was
+    // needed. Say so explicitly — "not available" would look like missing
+    // data, when the absence of a tx is the correct outcome.
+    txEl.textContent = "None — HOLD (no rebalance needed)";
+  } else if (decision.tx_status) {
+    txEl.textContent = `None — ${decision.tx_status}`;
   } else {
     txEl.textContent = "not available";
   }
