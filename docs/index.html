@@ -122,6 +122,28 @@
       </div>
     </section>
 
+    <section class="card" id="charts-card">
+      <h2>Price &amp; score history</h2>
+      <p id="charts-empty" class="muted">History data not available yet — the agent publishes it on each run.</p>
+      <div id="charts-body" class="hidden">
+        <div id="nav-chart-block" class="hidden">
+          <h3>NAV price <span id="nav-chart-note" class="muted small weight-note"></span></h3>
+          <div class="chart-wrap">
+            <svg id="nav-chart" viewBox="0 0 640 280" role="img" aria-label="NAV price history line chart"></svg>
+          </div>
+          <ul id="nav-legend" class="chart-legend"></ul>
+        </div>
+        <div id="score-chart-block" class="hidden">
+          <h3>Research score (total, 0–100) <span id="score-chart-note" class="muted small weight-note"></span></h3>
+          <div class="chart-wrap">
+            <svg id="score-chart" viewBox="0 0 640 280" role="img" aria-label="Research score history line chart"></svg>
+          </div>
+          <ul id="score-legend" class="chart-legend"></ul>
+        </div>
+        <p class="muted small chart-note">Dots mark recorded data points; lines connect recorded points only. NAV values are the Chainlink reference values the agent first recorded each day (one point per day; the portfolio table above shows the latest NAV, which can differ if the feed updates later the same day). Feeds hold Friday's close over the weekend, so the line can stay flat for several days. Scores are the agent's published per-run totals.</p>
+      </div>
+    </section>
+
     <section class="card" id="history-card">
       <h2>Rebalance history</h2>
       <p id="history-empty" class="muted hidden">No rebalances recorded yet.</p>

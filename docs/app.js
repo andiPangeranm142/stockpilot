@@ -375,6 +375,227 @@ function renderHistory(records) {
   }
 }
 
+// ---------- History charts (inline SVG, no chart library) ----------
+// Every point comes from data/history.json, which the agent builds from
+// its recorded price history and decision files. Dots mark recorded
+// points; the line only connects them — nothing is interpolated or
+// projected. A chart renders only when it has >= 2 distinct timestamps;
+// otherwise the section keeps its neutral "not available" message.
+
+const CHART_W = 640;
+const CHART_H = 280;
+const CHART_MARGIN = { left: 58, right: 14, top: 14, bottom: 32 };
+
+async function loadHistory() {
+  try {
+    const res = await fetch("data/history.json", { cache: "no-store" });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null; // History file missing or unreadable — charts stay hidden.
+  }
+}
+
+function fmtDay(iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "not available";
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+}
+
+function fmtRun(iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "not available";
+  const day = d.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+  const time = d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "UTC" });
+  return `${day}, ${time} UTC`;
+}
+
+function buildLineChart(svg, series, { yMin, yMax, yTicks, yFormat }) {
+  const NS = "http://www.w3.org/2000/svg";
+  svg.replaceChildren();
+  const allPoints = series.flatMap((s) => s.points);
+  const xs = allPoints.map((p) => p.t);
+  const xMin = Math.min(...xs);
+  const xMax = Math.max(...xs);
+  const plotW = CHART_W - CHART_MARGIN.left - CHART_MARGIN.right;
+  const plotH = CHART_H - CHART_MARGIN.top - CHART_MARGIN.bottom;
+  const xScale = (t) => CHART_MARGIN.left + ((t - xMin) / (xMax - xMin)) * plotW;
+  const yScale = (y) => CHART_MARGIN.top + (1 - (y - yMin) / (yMax - yMin)) * plotH;
+
+  // Horizontal gridlines + y-axis labels at the given tick values.
+  for (const v of yTicks) {
+    const y = yScale(v);
+    const line = document.createElementNS(NS, "line");
+    line.setAttribute("x1", CHART_MARGIN.left);
+    line.setAttribute("x2", CHART_W - CHART_MARGIN.right);
+    line.setAttribute("y1", y.toFixed(1));
+    line.setAttribute("y2", y.toFixed(1));
+    line.setAttribute("class", "chart-grid");
+    svg.appendChild(line);
+    const label = document.createElementNS(NS, "text");
+    label.setAttribute("x", CHART_MARGIN.left - 8);
+    label.setAttribute("y", (y + 4).toFixed(1));
+    label.setAttribute("text-anchor", "end");
+    label.setAttribute("class", "chart-axis");
+    label.textContent = yFormat(v);
+    svg.appendChild(label);
+  }
+
+  // X-axis labels: first, middle, last timestamp. The outer labels are
+  // anchored inward so they never clip at the chart edges.
+  const xLabels = [
+    { t: xMin, anchor: "start" },
+    { t: (xMin + xMax) / 2, anchor: "middle" },
+    { t: xMax, anchor: "end" },
+  ];
+  for (const { t, anchor } of xLabels) {
+    const label = document.createElementNS(NS, "text");
+    label.setAttribute("x", xScale(t).toFixed(1));
+    label.setAttribute("y", CHART_H - 8);
+    label.setAttribute("text-anchor", anchor);
+    label.setAttribute("class", "chart-axis");
+    label.textContent = fmtDay(new Date(t).toISOString());
+    svg.appendChild(label);
+  }
+
+  for (const s of series) {
+    if (s.points.length === 0) continue;
+    if (s.points.length > 1) {
+      const line = document.createElementNS(NS, "polyline");
+      line.setAttribute(
+        "points",
+        s.points.map((p) => `${xScale(p.t).toFixed(1)},${yScale(p.y).toFixed(1)}`).join(" ")
+      );
+      line.setAttribute("fill", "none");
+      line.setAttribute("stroke", s.color);
+      line.setAttribute("stroke-width", "2");
+      line.setAttribute("stroke-linejoin", "round");
+      line.setAttribute("stroke-linecap", "round");
+      svg.appendChild(line);
+    }
+    for (const p of s.points) {
+      const dot = document.createElementNS(NS, "circle");
+      dot.setAttribute("cx", xScale(p.t).toFixed(1));
+      dot.setAttribute("cy", yScale(p.y).toFixed(1));
+      dot.setAttribute("r", "3.5");
+      dot.setAttribute("fill", s.color);
+      dot.setAttribute("stroke", "#05070d");
+      dot.setAttribute("stroke-width", "1");
+      const title = document.createElementNS(NS, "title");
+      title.textContent = p.tip;
+      dot.appendChild(title);
+      svg.appendChild(dot);
+    }
+  }
+}
+
+function renderChartLegend(listId, series) {
+  const ul = $(listId);
+  ul.replaceChildren();
+  for (const s of series) {
+    const li = document.createElement("li");
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = s.color;
+    li.append(swatch, document.createTextNode(s.label));
+    ul.appendChild(li);
+  }
+}
+
+function renderCharts(history, record, decision) {
+  const body = $("charts-body");
+  const empty = $("charts-empty");
+  if (!history || typeof history !== "object") return; // keep empty message
+
+  // Holdings order: on-chain target first (matches the donut), then the
+  // latest decision's target weights, then every symbol in the history.
+  let holdings = [];
+  if (record) holdings = parseWeights(record).map((w) => w.ticker);
+  if (holdings.length === 0 && decision && decision.target_weights_bps) {
+    holdings = Object.entries(decision.target_weights_bps)
+      .sort((a, b) => b[1] - a[1])
+      .map(([sym]) => sym);
+  }
+  if (holdings.length === 0) holdings = Object.keys(history.nav_prices || {}).sort();
+  if (holdings.length === 0) return;
+
+  const navSeries = [];
+  const scoreSeries = [];
+  holdings.forEach((sym, i) => {
+    const color = PALETTE[i % PALETTE.length];
+    const navPts = ((history.nav_prices || {})[sym] || [])
+      .map((pt) => ({
+        t: Date.parse(pt.t),
+        y: Number(pt.price),
+        tip: `${sym} · ${fmtDay(pt.t)} · $${Number(pt.price).toFixed(2)}`,
+      }))
+      .filter((p) => Number.isFinite(p.t) && Number.isFinite(p.y));
+    if (navPts.length > 0) navSeries.push({ label: sym, color, points: navPts });
+    const scorePts = ((history.scores || {})[sym] || [])
+      .map((pt) => ({
+        t: Date.parse(pt.t),
+        y: Number(pt.total),
+        tip: `${sym} · ${fmtRun(pt.t)} · score ${pt.total}`,
+      }))
+      .filter((p) => Number.isFinite(p.t) && Number.isFinite(p.y));
+    if (scorePts.length > 0) scoreSeries.push({ label: sym, color, points: scorePts });
+  });
+
+  let anyChart = false;
+
+  // NAV chart — round-number y ticks (zero baseline when the data spans
+  // widely; never below $0), honest point count in the note.
+  const navTimes = new Set(navSeries.flatMap((s) => s.points.map((p) => p.t)));
+  if (navSeries.length > 0 && navTimes.size >= 2) {
+    const ys = navSeries.flatMap((s) => s.points.map((p) => p.y));
+    const lo = Math.min(...ys);
+    const hi = Math.max(...ys);
+    const span = hi - lo || 1;
+    const step = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000]
+      .find((s) => span / s <= 5) || 5000;
+    const yMin = Math.max(0, Math.floor((lo - span * 0.05) / step) * step);
+    const yMax = Math.ceil((hi + span * 0.05) / step) * step;
+    const yTicks = [];
+    for (let v = yMin; v <= yMax + 1e-9; v += step) yTicks.push(v);
+    buildLineChart($("nav-chart"), navSeries, {
+      yMin,
+      yMax,
+      yTicks,
+      yFormat: (v) => `$${Number.isInteger(v) ? v : v.toFixed(1)}`,
+    });
+    renderChartLegend("nav-legend", navSeries);
+    const dates = history.nav_dates || [];
+    $("nav-chart-note").textContent = dates.length > 0
+      ? `${dates.length} data points · ${fmtDay(`${dates[0]}T00:00:00Z`)}–${fmtDay(`${dates[dates.length - 1]}T00:00:00Z`)}`
+      : "";
+    $("nav-chart-block").classList.remove("hidden");
+    anyChart = true;
+  }
+
+  // Score chart — fixed 0–100 scale, because scores are defined on 0–100.
+  const scoreTimes = new Set(scoreSeries.flatMap((s) => s.points.map((p) => p.t)));
+  if (scoreSeries.length > 0 && scoreTimes.size >= 2) {
+    buildLineChart($("score-chart"), scoreSeries, {
+      yMin: 0,
+      yMax: 100,
+      yTicks: [0, 25, 50, 75, 100],
+      yFormat: (v) => String(Math.round(v)),
+    });
+    renderChartLegend("score-legend", scoreSeries);
+    const runs = history.score_runs || [];
+    $("score-chart-note").textContent = runs.length > 0
+      ? `${runs.length} runs · ${fmtDay(runs[0])}–${fmtDay(runs[runs.length - 1])}`
+      : "";
+    $("score-chart-block").classList.remove("hidden");
+    anyChart = true;
+  }
+
+  if (anyChart) {
+    empty.classList.add("hidden");
+    body.classList.remove("hidden");
+  }
+}
+
 async function main() {
   $("rpc-url").textContent = CONFIG.RPC_URL;
   $("footer-repo").href = CONFIG.REPO_URL;
@@ -408,10 +629,15 @@ async function main() {
   const decision = await loadDecision();
   renderDecision(decision);
 
+  // History file for the charts (published by the agent on each run;
+  // independent of the chain, so it loads even before deploy).
+  const historyData = await loadHistory();
+
   if (!deployed || !provider) {
     // No contract to read: show the empty states, not errors.
     renderPortfolio(null, decision);
     renderHistory([]);
+    renderCharts(historyData, null, decision);
     if (!deployed) $("rebalance-count").textContent = "not available";
     return;
   }
@@ -427,24 +653,28 @@ async function main() {
     console.error("rebalanceCount failed:", err);
     renderPortfolio(null, decision);
     renderHistory([]);
+    renderCharts(historyData, null, decision);
     return;
   }
 
   if (count === 0) {
     renderPortfolio(null, decision);
     renderHistory([]);
+    renderCharts(historyData, null, decision);
     return;
   }
 
   // Latest record drives the portfolio table. getLatest() reverts when the
   // ledger is empty; count > 0 here, but guard anyway.
+  let latest = null;
   try {
-    const latest = await ledger.getLatest();
+    latest = await ledger.getLatest();
     renderPortfolio(latest, decision);
   } catch (err) {
     console.error("getLatest failed:", err);
     renderPortfolio(null, decision);
   }
+  renderCharts(historyData, latest, decision);
 
   // Full history, newest first. Reads are sequential to stay gentle on the
   // public RPC; capped at MAX_HISTORY most recent records.

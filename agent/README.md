@@ -124,6 +124,42 @@ to `../docs/data/latest-decision.json` (for the dashboard). Contents:
 
 Decision files contain only public market data and hashes — never secrets.
 
+## Dashboard history file (`docs/data/history.json`)
+
+GitHub Pages only serves `docs/`, so the dashboard cannot read
+`agent/data/`. Each run therefore also publishes `history.json`, built
+from the already recorded data by `stockpilot/history.py` (no new
+fetching, no interpolation):
+
+```json
+{
+  "generated_at": "2026-11-16T09:42:59+00:00",
+  "sources": {
+    "nav_prices": "agent/data/price-history.jsonl",
+    "scores": "agent/data/decisions/*.json"
+  },
+  "nav_dates": ["2026-11-13", "2026-11-14", "2026-11-15", "2026-11-16"],
+  "score_runs": ["2026-11-13T23:59:31+00:00", "..."],
+  "nav_prices": {"NVDAc": [{"t": "2026-11-13T00:00:00+00:00",
+                            "price": "160.77",
+                            "nav_updated_at": "2026-11-13T23:36:23+00:00"}]},
+  "scores": {"NVDAc": [{"t": "2026-11-13T23:59:31+00:00", "total": 70.54}]}
+}
+```
+
+- `nav_prices`: one point per recorded (day, symbol). The point's `t` is
+  the *recording date* (UTC midnight); the NAV's own `nav_updated_at` is
+  kept alongside. Keying by recording date matters: NAV feeds hold
+  Friday's close over the weekend, so several recorded days can share one
+  `nav_updated_at` — keying by it would collapse distinct observations
+  into a single point.
+- `scores`: one point per run per token, using the recorded decision
+  timestamp and total score. Excluded tokens (`total: null`) get no point.
+- Publishing is best-effort: if it fails, the run still succeeds (the
+  decision and any rebalance are already recorded) and the failure is
+  logged as a warning. The dashboard shows a neutral "not available"
+  message when the file is missing — never fake zeros.
+
 ## On-chain submission
 
 - Ledger: `StockPilotLedger` on **Base Sepolia** (chain ID 84532,
@@ -149,10 +185,11 @@ agent/
 │   ├── research.py     # rule-based scoring + price history (JSONL)
 │   ├── portfolio.py    # target weights, drift, rebalance decision
 │   ├── hashing.py      # keccak256 snapshot/rationale hashes
+│   ├── history.py      # builds docs/data/history.json from recorded data
 │   ├── submit.py       # ledger contract calls (read + submit)
 │   └── run.py          # CLI: python -m stockpilot.run [--dry-run] [--force]
 ├── tests/
-│   └── test_agent.py   # 36 tests (pytest)
+│   └── test_agent.py   # 41 tests (pytest)
 ├── data/
 │   ├── price-history.jsonl
 │   └── decisions/

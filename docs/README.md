@@ -22,10 +22,30 @@ transaction. `app.js` uses an ethers `JsonRpcProvider` pointed at the public
 Base Sepolia RPC to call the `StockPilotLedger` contract: `rebalanceCount()`
 and `getRebalance(i)` for the history, `getLatest()` for the current target
 portfolio, plus the latest block number for the network status card. It also
-fetches `data/latest-decision.json`, which the agent publishes on each run,
-for the rationale, per-token score breakdown, drift, and transaction hash.
-If either source is missing, the dashboard shows "not available" (or an
-explicit empty state) instead of inventing numbers.
+fetches two files the agent publishes on each run:
+
+- `data/latest-decision.json` — the rationale, per-token score breakdown,
+  drift, and transaction hash of the latest run.
+- `data/history.json` — NAV price + research-score series for the
+  "Price & score history" charts (see `agent/README.md` for the format).
+  Every chart point traces back to a recorded line in
+  `agent/data/price-history.jsonl` or a recorded decision file; dots mark
+  recorded points and lines only connect them — nothing is interpolated or
+  projected. If either source is missing, the dashboard shows "not
+  available" (or an explicit empty state) instead of inventing numbers.
+
+## Verify the dashboard
+
+`tests/verify_dashboard.py` checks the dashboard end to end with Playwright
+(requires Playwright + Chromium): every displayed price, weight, and score
+against the on-chain record and the decision files; every chart point
+against `history.json`; no console errors; desktop + mobile screenshots.
+
+```sh
+# from the repo root, with the operator venv (has Playwright)
+../.venv/bin/python docs/tests/verify_dashboard.py          # local copy
+../.venv/bin/python docs/tests/verify_dashboard.py --live   # live site
+```
 
 ## Before the contract is deployed
 
