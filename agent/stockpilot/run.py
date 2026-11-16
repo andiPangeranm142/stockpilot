@@ -18,6 +18,8 @@ Flow:
    copy the latest decision to ``docs/data/latest-decision.json``.
 8. If a rebalance is due, not a dry run, and the contract is available:
    submit ``recordRebalance`` and record the tx hash in the decision.
+9. Publish ``docs/data/history.json`` — NAV price + score series built
+   from the already recorded history, for the dashboard charts.
 
 Paper-portfolio simulation only. Not investment advice.
 """
@@ -35,6 +37,7 @@ from pathlib import Path
 from . import api_client
 from .api_client import DataUnavailableError, TokenSnapshot
 from .hashing import canonical_snapshot_hash, rationale_hash
+from .history import write_history_json
 from .portfolio import (
     build_target_weights,
     decide_rebalance,
@@ -61,6 +64,7 @@ DATA_DIR = AGENT_DIR / "data"
 HISTORY_FILE = DATA_DIR / "price-history.jsonl"
 DECISIONS_DIR = DATA_DIR / "decisions"
 LATEST_DECISION_PATH = REPO_ROOT / "docs" / "data" / "latest-decision.json"
+HISTORY_JSON_PATH = REPO_ROOT / "docs" / "data" / "history.json"
 
 DISCLAIMER = (
     "Paper-portfolio simulation for the StockPilot hackathon project. "
@@ -131,6 +135,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--force", action="store_true", help="force a rebalance")
     parser.add_argument("--env-file", default=None, help="path to .env file with DEPLOYER_PRIVATE_KEY")
     parser.add_argument("--data-dir", default=None, help="override agent/data directory")
+    parser.add_argument("--history-json", default=None,
+                        help="override output path for docs/data/history.json "
+                             "(default: docs/data/history.json in the repo)")
     parser.add_argument("--api-url", default=api_client.API_BASE_URL)
     parser.add_argument("--chainlink-rpc", default=api_client.CHAINLINK_RPC_URL)
     parser.add_argument("--sepolia-rpc", default=SEPOLIA_RPC_URL)
@@ -358,6 +365,17 @@ def main(argv: list[str] | None = None) -> int:
     shutil.copyfile(decision_path, LATEST_DECISION_PATH)
     log.info("%sdecision written: %s", tag, decision_path)
     log.info("%slatest decision copied to %s", tag, LATEST_DECISION_PATH)
+
+    # 10. Publish the history file for the dashboard charts. This is
+    # best-effort: a failure here must not undo a recorded decision or
+    # a submitted rebalance, so it only logs a warning.
+    history_json_path = (
+        Path(args.history_json) if args.history_json else HISTORY_JSON_PATH
+    )
+    try:
+        write_history_json(history_file, decisions_dir, history_json_path)
+    except Exception as exc:  # noqa: BLE001 - history publish is best-effort
+        log.warning("history.json NOT published (%s): %s", history_json_path, exc)
     log.info(
         "%sDONE: universe=%d holdings=%d rebalance=%s tx=%s",
         tag,

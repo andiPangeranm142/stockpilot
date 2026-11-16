@@ -553,3 +553,150 @@ def test_read_latest_no_records_returns_none():
 
     w3 = FakeLedgerW3(FakeLedgerContract(0, None))
     assert read_latest(w3, "0x0000000000000000000000000000000000000001") is None
+
+
+# ---------------------------------------------------------------------------
+# Dashboard history file (stockpilot.history)
+# ---------------------------------------------------------------------------
+
+def _write_history_fixture(tmp_path):
+    """Two days of price history + two decision files (real shapes)."""
+    hist = tmp_path / "price-history.jsonl"
+    hist.write_text(
+        '{"date": "2026-11-13", "nav_price": "160.76", '
+        '"nav_updated_at": "2026-11-13T21:32:29+00:00", "source": "api", "symbol": "NVDAc"}\n'
+        '{"date": "2026-11-14", "nav_price": "160.77", '
+        '"nav_updated_at": "2026-11-14T23:36:10+00:00", "source": "api", "symbol": "NVDAc"}\n'
+        '{"date": "2026-11-13", "nav_price": "355.58", '
+        '"nav_updated_at": "2026-11-13T21:32:29+00:00", "source": "api", "symbol": "AAPLc"}\n',
+        encoding="utf-8",
+    )
+    decisions = tmp_path / "decisions"
+    decisions.mkdir()
+    import json as _json
+
+    (decisions / "2026-11-14T00-34-15Z.json").write_text(
+        _json.dumps({
+            "timestamp": "2026-11-14T00:34:15+00:00",
+            "scores": {
+                "NVDAc": {"total": 70.5, "momentum": 50.0},
+                "AAPLc": {"total": 56.3, "momentum": 50.0},
+                "CRCLc": {"total": None, "excluded_reason": "no NAV"},
+            },
+        }),
+        encoding="utf-8",
+    )
+    (decisions / "2026-11-15T01-24-42Z.json").write_text(
+        _json.dumps({
+            "timestamp": "2026-11-15T01:24:42+00:00",
+            "scores": {
+                "NVDAc": {"total": 71.1, "momentum": 52.0},
+                "AAPLc": {"total": 56.9, "momentum": 50.0},
+            },
+        }),
+        encoding="utf-8",
+    )
+    return hist, decisions
+
+
+def test_history_payload_uses_recorded_points_only(tmp_path):
+    """Payload mirrors the recorded files exactly — no invented points."""
+    from stockpilot.history import build_history_payload
+
+    hist, decisions = _write_history_fixture(tmp_path)
+    payload = build_history_payload(hist, decisions)
+
+    assert payload["nav_dates"] == ["2026-11-13", "2026-11-14"]
+    # Points are keyed by recording date (UTC midnight); the NAV's own
+    # timestamp is preserved alongside — never collapsed or invented.
+    assert payload["nav_prices"]["NVDAc"] == [
+        {"t": "2026-11-13T00:00:00+00:00", "price": "160.76",
+         "nav_updated_at": "2026-11-13T21:32:29+00:00"},
+        {"t": "2026-11-14T00:00:00+00:00", "price": "160.77",
+         "nav_updated_at": "2026-11-14T23:36:10+00:00"},
+    ]
+    assert len(payload["nav_prices"]["AAPLc"]) == 1  # only 1 recorded day
+    assert payload["score_runs"] == [
+        "2026-11-14T00:34:15+00:00",
+        "2026-11-15T01:24:42+00:00",
+    ]
+    assert payload["scores"]["NVDAc"] == [
+        {"t": "2026-11-14T00:34:15+00:00", "total": 70.5},
+        {"t": "2026-11-15T01:24:42+00:00", "total": 71.1},
+    ]
+    # Excluded token (total None) produces no points at all.
+    assert "CRCLc" not in payload["scores"]
+    assert payload["sources"]["nav_prices"] == "agent/data/price-history.jsonl"
+
+
+def test_history_payload_empty_inputs(tmp_path):
+    """Missing files yield empty series, not a crash or fake zeros."""
+    from stockpilot.history import build_history_payload
+
+    payload = build_history_payload(
+        tmp_path / "no-such.jsonl", tmp_path / "no-such-dir"
+    )
+    assert payload["nav_prices"] == {}
+    assert payload["scores"] == {}
+    assert payload["nav_dates"] == []
+    assert payload["score_runs"] == []
+
+
+def test_history_payload_skips_bad_decision_files(tmp_path):
+    """A malformed decision file is skipped; good files still load."""
+    from stockpilot.history import build_history_payload
+
+    hist, decisions = _write_history_fixture(tmp_path)
+    (decisions / "2026-11-16T00-00-00Z.json").write_text("{not json", encoding="utf-8")
+    (decisions / "2026-11-16T01-00-00Z.json").write_text(
+        '{"scores": {"NVDAc": {"total": 99.9}}}', encoding="utf-8"  # no timestamp
+    )
+    payload = build_history_payload(hist, decisions)
+    assert payload["score_runs"] == [
+        "2026-11-14T00:34:15+00:00",
+        "2026-11-15T01:24:42+00:00",
+    ]
+    assert payload["scores"]["NVDAc"][-1]["total"] == 71.1
+
+
+def test_write_history_json_roundtrip(tmp_path):
+    """write_history_json writes valid JSON the dashboard can read."""
+    import json as _json
+
+    from stockpilot.history import write_history_json
+
+    hist, decisions = _write_history_fixture(tmp_path)
+    out = tmp_path / "docs" / "data" / "history.json"
+    payload = write_history_json(hist, decisions, out)
+    assert out.exists()
+    assert _json.loads(out.read_text(encoding="utf-8")) == payload
+    assert payload["nav_prices"]["NVDAc"][0]["price"] == "160.76"
+
+
+def test_history_weekend_nav_not_collapsed(tmp_path):
+    """Days sharing one nav_updated_at stay separate points.
+
+    NAV feeds hold Friday's close over the weekend, so the 13/14/15 Nov
+    records can all carry the same nav_updated_at. Keying points by
+    recording date keeps them distinct — keying by nav_updated_at would
+    collapse three observations into one.
+    """
+    from stockpilot.history import build_history_payload
+
+    hist = tmp_path / "price-history.jsonl"
+    hist.write_text(
+        "".join(
+            '{"date": "%s", "nav_price": "160.76", '
+            '"nav_updated_at": "2026-11-13T23:36:23+00:00", "source": "api", '
+            '"symbol": "NVDAc"}\n' % day
+            for day in ("2026-11-13", "2026-11-14", "2026-11-15")
+        ),
+        encoding="utf-8",
+    )
+    payload = build_history_payload(hist, tmp_path / "no-decisions")
+    assert payload["nav_dates"] == ["2026-11-13", "2026-11-14", "2026-11-15"]
+    points = payload["nav_prices"]["NVDAc"]
+    assert len(points) == 3
+    assert [p["t"][:10] for p in points] == ["2026-11-13", "2026-11-14", "2026-11-15"]
+    assert all(p["price"] == "160.76" for p in points)
+    assert all(p["nav_updated_at"] == "2026-11-13T23:36:23+00:00" for p in points)
