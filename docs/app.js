@@ -331,7 +331,7 @@ function renderPortfolio(record, decision) {
   });
   $("portfolio-table").classList.remove("hidden");
   $("portfolio-meta").textContent =
-    `From on-chain record #${record.id} · ${fmtUtc(record.timestamp)} · recorded by ${record.agent}`;
+    `From the on-chain record · ${fmtUtc(record.timestamp)} · recorded by ${record.agent}`;
 }
 
 function renderHistory(records) {
@@ -348,7 +348,10 @@ function renderHistory(records) {
     head.className = "hist-head";
     const idEl = document.createElement("span");
     idEl.className = "hist-id";
-    idEl.textContent = `Rebalance #${record.id}`;
+    // 1-based numbering for readers: the first rebalance is #1.
+    // (record.id is the contract's 0-based index, returned by ethers as a
+    // BigInt — convert to Number before adding, BigInt + number throws.)
+    idEl.textContent = `Rebalance #${Number(record.id) + 1}`;
     const timeEl = document.createElement("span");
     timeEl.className = "hist-time";
     timeEl.textContent = fmtUtc(record.timestamp);
@@ -372,10 +375,28 @@ function renderHistory(records) {
       barEl.appendChild(span);
     });
 
+    // Hashes as label/value pairs: labels never break mid-word on narrow
+    // screens; only the hash values may break.
     const hashesEl = document.createElement("div");
     hashesEl.className = "hash";
-    hashesEl.textContent =
-      `nav ${shortHash(record.navSnapshotHash)} · rationale ${shortHash(record.rationaleHash)} · agent ${shortHash(record.agent)}`;
+    const hashParts = [
+      ["nav", shortHash(record.navSnapshotHash)],
+      ["rationale", shortHash(record.rationaleHash)],
+      ["agent", shortHash(record.agent)],
+    ];
+    hashParts.forEach(([label, value], i) => {
+      if (i > 0) hashesEl.appendChild(document.createTextNode(" · "));
+      const pair = document.createElement("span");
+      pair.className = "hash-pair";
+      const labelEl = document.createElement("span");
+      labelEl.className = "hash-label";
+      labelEl.textContent = `${label} `;
+      const valueEl = document.createElement("span");
+      valueEl.className = "hash-value";
+      valueEl.textContent = value;
+      pair.append(labelEl, valueEl);
+      hashesEl.appendChild(pair);
+    });
 
     item.append(head, weightsEl, barEl, hashesEl);
     list.appendChild(item);

@@ -314,7 +314,9 @@ tbody tr:last-child td { border-bottom: none; }
 .timeline .hist-id { font-weight: 800; font-size: 1.02rem; }
 .timeline .hist-time { color: var(--muted); font-size: 0.88rem; }
 .timeline .hist-weights { margin: 6px 0 10px; font-size: 0.93rem; }
-.timeline .hash { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); word-break: break-all; margin-top: 8px; }
+.timeline .hash { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+.timeline .hash-label { white-space: nowrap; }
+.timeline .hash-value { word-break: break-all; }
 
 .stacked-bar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; background: rgba(255, 255, 255, 0.06); }
 .stacked-bar > span { display: block; height: 100%; }
