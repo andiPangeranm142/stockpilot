@@ -46,3 +46,15 @@
 {"date": "2026-11-16", "nav_price": "525.1151397", "nav_updated_at": "2026-11-16T01:00:32+00:00", "source": "api", "symbol": "MSFTc"}
 {"date": "2026-11-16", "nav_price": "357.72827323", "nav_updated_at": "2026-11-16T01:00:26+00:00", "source": "api", "symbol": "AAPLc"}
 {"date": "2026-11-16", "nav_price": "267.09089525", "nav_updated_at": "2026-11-16T01:00:31+00:00", "source": "api", "symbol": "AMZNc"}
+{"date": "2026-11-17", "nav_price": "57.36", "nav_updated_at": "2026-11-16T23:33:12+00:00", "source": "api", "symbol": "CRCLc"}
+{"date": "2026-11-17", "nav_price": "379.05499999", "nav_updated_at": "2026-11-16T20:50:59+00:00", "source": "api", "symbol": "TSLAc"}
+{"date": "2026-11-17", "nav_price": "284.58728272", "nav_updated_at": "2026-11-16T19:40:53+00:00", "source": "api", "symbol": "GOOGLc"}
+{"date": "2026-11-17", "nav_price": "814.39427415", "nav_updated_at": "2026-11-17T01:17:49+00:00", "source": "api", "symbol": "SNDKc"}
+{"date": "2026-11-17", "nav_price": "102.855", "nav_updated_at": "2026-11-16T23:32:54+00:00", "source": "api", "symbol": "MSTRc"}
+{"date": "2026-11-17", "nav_price": "54.08250469", "nav_updated_at": "2026-11-17T01:14:57+00:00", "source": "api", "symbol": "INTCc"}
+{"date": "2026-11-17", "nav_price": "156.30903961", "nav_updated_at": "2026-11-16T23:57:08+00:00", "source": "api", "symbol": "NVDAc"}
+{"date": "2026-11-17", "nav_price": "137.59", "nav_updated_at": "2026-11-16T21:42:10+00:00", "source": "api", "symbol": "SPCXc"}
+{"date": "2026-11-17", "nav_price": "623.80068244", "nav_updated_at": "2026-11-16T23:05:05+00:00", "source": "api", "symbol": "METAc"}
+{"date": "2026-11-17", "nav_price": "520.93", "nav_updated_at": "2026-11-16T23:02:16+00:00", "source": "api", "symbol": "MSFTc"}
+{"date": "2026-11-17", "nav_price": "354.07608727", "nav_updated_at": "2026-11-16T23:01:41+00:00", "source": "api", "symbol": "AAPLc"}
+{"date": "2026-11-17", "nav_price": "257.695", "nav_updated_at": "2026-11-16T18:31:24+00:00", "source": "api", "symbol": "AMZNc"}

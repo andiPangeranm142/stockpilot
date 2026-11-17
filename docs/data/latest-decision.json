@@ -2,7 +2,7 @@
   "contract_address": "0x13612a2571C091625db489458298a31c507F54a1",
   "contract_error": null,
   "data": {
-    "excluded_count": 346,
+    "excluded_count": 365,
     "excluded_tokens": [
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -27,6 +27,10 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "APPc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "COHUc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -226,6 +230,10 @@
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "FMCc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "WINGc"
       },
       {
@@ -267,6 +275,10 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "SEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "VCc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -347,6 +359,10 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "FIGc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "UIc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -518,6 +534,10 @@
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NNc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "CATc"
       },
       {
@@ -543,6 +563,10 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "WHRc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "YELPc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -671,6 +695,14 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "ENPHc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "AMPXc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NEXTc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -950,6 +982,10 @@
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "HONc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "GILDc"
       },
       {
@@ -1011,6 +1047,10 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "VRTXc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "LWLGc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -1142,6 +1182,10 @@
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "TOSTc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "AAOIc"
       },
       {
@@ -1151,6 +1195,18 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "TEMc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "AVAVc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SWKSc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "HEc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -1238,6 +1294,10 @@
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "CCc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "BACc"
       },
       {
@@ -1246,7 +1306,15 @@
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "KTOSc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "CMGc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NTAPc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -1267,6 +1335,10 @@
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "RKLBc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "ESc"
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
@@ -1338,6 +1410,10 @@
       },
       {
         "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SOc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
         "symbol": "CLSKc"
       },
       {
@@ -1393,80 +1469,80 @@
       {
         "contract_address": "0xB20000000000000000000019f6E7C675b73C2e4D",
         "multiplier": "1",
-        "nav_price": "57.94",
-        "nav_updated_at": "2026-11-16T09:13:39+00:00",
+        "nav_price": "57.36",
+        "nav_updated_at": "2026-11-16T23:33:12+00:00",
         "source": "api",
         "symbol": "CRCLc",
-        "total_supply": "2412.73912116"
+        "total_supply": "2500.68953255"
       },
       {
         "contract_address": "0xb2000000000000000000001e800a7f5189430cD0",
         "multiplier": "1",
-        "nav_price": "385.03089417",
-        "nav_updated_at": "2026-11-16T05:40:28+00:00",
+        "nav_price": "379.05499999",
+        "nav_updated_at": "2026-11-16T20:50:59+00:00",
         "source": "api",
         "symbol": "TSLAc",
-        "total_supply": "6432.88183743"
+        "total_supply": "6399.15013742"
       },
       {
         "contract_address": "0xb2000000000000000000002D0BA3164cc74f58B7",
         "multiplier": "1.0003771186767842",
-        "nav_price": "294.7661199",
-        "nav_updated_at": "2026-11-16T09:12:44+00:00",
+        "nav_price": "284.58728272",
+        "nav_updated_at": "2026-11-16T19:40:53+00:00",
         "source": "api",
         "symbol": "GOOGLc",
-        "total_supply": "35372.00982128"
+        "total_supply": "35641.90803758"
       },
       {
         "contract_address": "0xb200000000000000000000397293Cb8cda9a10c5",
         "multiplier": "1",
-        "nav_price": "838.746",
-        "nav_updated_at": "2026-11-16T09:31:00+00:00",
+        "nav_price": "814.39427415",
+        "nav_updated_at": "2026-11-17T01:17:49+00:00",
         "source": "api",
         "symbol": "SNDKc",
-        "total_supply": "2795.03853669"
+        "total_supply": "3090.03853669"
       },
       {
         "contract_address": "0xb2000000000000000000004884b426556b92883d",
         "multiplier": "1",
-        "nav_price": "102.858",
-        "nav_updated_at": "2026-11-16T09:22:09+00:00",
+        "nav_price": "102.855",
+        "nav_updated_at": "2026-11-16T23:32:54+00:00",
         "source": "api",
         "symbol": "MSTRc",
-        "total_supply": "20161.97804302"
+        "total_supply": "20925.97804302"
       },
       {
         "contract_address": "0xB2000000000000000000004AFF16039bA04bdFBc",
         "multiplier": "1",
-        "nav_price": "56.95",
-        "nav_updated_at": "2026-11-16T09:40:50+00:00",
+        "nav_price": "54.08250469",
+        "nav_updated_at": "2026-11-17T01:14:57+00:00",
         "source": "api",
         "symbol": "INTCc",
-        "total_supply": "2388.81891492"
+        "total_supply": "2670.39176823"
       },
       {
         "contract_address": "0xb20000000000000000000078ee7ce2fE4908108C",
         "multiplier": "1.0005379395763694",
-        "nav_price": "160.03604343",
-        "nav_updated_at": "2026-11-16T09:02:07+00:00",
+        "nav_price": "156.30903961",
+        "nav_updated_at": "2026-11-16T23:57:08+00:00",
         "source": "api",
         "symbol": "NVDAc",
-        "total_supply": "49255.60410884"
+        "total_supply": "53389.38038687"
       },
       {
         "contract_address": "0xb2000000000000000000007b9fcbd005511aCBd5",
         "multiplier": "1",
-        "nav_price": "139.975",
-        "nav_updated_at": "2026-11-16T09:15:44+00:00",
+        "nav_price": "137.59",
+        "nav_updated_at": "2026-11-16T21:42:10+00:00",
         "source": "api",
         "symbol": "SPCXc",
-        "total_supply": "26377.9022166"
+        "total_supply": "27915.83393549"
       },
       {
         "contract_address": "0xb2000000000000000000008bC8786B856E61707C",
         "multiplier": "1.0003137922895982",
-        "nav_price": "637.45996727",
-        "nav_updated_at": "2026-11-16T09:04:07+00:00",
+        "nav_price": "623.80068244",
+        "nav_updated_at": "2026-11-16T23:05:05+00:00",
         "source": "api",
         "symbol": "METAc",
         "total_supply": "8482.68154474"
@@ -1474,44 +1550,44 @@
       {
         "contract_address": "0xB200000000000000000000Ab99cFa739E253872B",
         "multiplier": "1",
-        "nav_price": "528.17",
-        "nav_updated_at": "2026-11-16T09:02:18+00:00",
+        "nav_price": "520.93",
+        "nav_updated_at": "2026-11-16T23:02:16+00:00",
         "source": "api",
         "symbol": "MSFTc",
         "total_supply": "2696.70741505"
       },
       {
         "contract_address": "0xb200000000000000000000C2e324d24d7eEcd1fb",
-        "multiplier": "1",
-        "nav_price": "357.72827323",
-        "nav_updated_at": "2026-11-16T01:00:26+00:00",
+        "multiplier": "1.0005003893019802",
+        "nav_price": "354.07608727",
+        "nav_updated_at": "2026-11-16T23:01:41+00:00",
         "source": "api",
         "symbol": "AAPLc",
-        "total_supply": "6000.17259753"
+        "total_supply": "6034.1555928"
       },
       {
         "contract_address": "0xb200000000000000000000d9192b6B456483C2E8",
         "multiplier": "1",
-        "nav_price": "264.425",
-        "nav_updated_at": "2026-11-16T09:08:06+00:00",
+        "nav_price": "257.695",
+        "nav_updated_at": "2026-11-16T18:31:24+00:00",
         "source": "api",
         "symbol": "AMZNc",
-        "total_supply": "7833.50295316"
+        "total_supply": "8746.50295316"
       }
     ],
     "sources": {
       "api": 12,
       "chainlink": 0
     },
-    "tokens_seen": 358,
+    "tokens_seen": 377,
     "universe_size": 12
   },
-  "days_since_last_rebalance": 2.3809884855427126,
+  "days_since_last_rebalance": 3.0349785416904425,
   "disclaimer": "Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
-  "drift_bps": 219,
+  "drift_bps": 155,
   "dry_run": false,
   "first_run": false,
-  "nav_snapshot_hash": "0x622a13fae6edee10228a5dc1e15cbc3b5b7afde5a1291ca8fdecdd894a599c6f",
+  "nav_snapshot_hash": "0xdf1fe5342e90e5988bd56250f561f52a33a12f556749e94cbb54429783ce2c9e",
   "needs_rebalance": false,
   "onchain": {
     "agent": "0xde897528DEC3E6de4CF52616F7b88c72FA8403eC",
@@ -1531,202 +1607,202 @@
       1129
     ]
   },
-  "rationale": "StockPilot rebalance decision \u2014 2026-11-16 09:42 UTC. Universe: 12 tokenized stocks with a fresh Chainlink NAV out of 358 listed tokens (346 excluded: no NAV or stale NAV \u2014 never priced from invented data). Top research scores (0-100; momentum 40%, dividend multiplier 20%, adoption 20%, freshness 20%): NVDAc 72.2, SPCXc 70.9, GOOGLc 68.1. Target portfolio (8 holdings, 30% cap, 5% min): NVDAc 14.6%, SPCXc 14.3%, GOOGLc 13.7%, METAc 11.9%, AMZNc 11.9%, AAPLc 11.6%, TSLAc 11.3%, MSTRc 10.6%. Drift vs on-chain target: 219 bps (threshold 500 bps). Action: HOLD. No rebalance trigger fired. Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
-  "rationale_hash": "0x63acc478f468abc894215da3e54cf949fa5f9430601572602941c7474ec75c67",
+  "rationale": "StockPilot rebalance decision \u2014 2026-11-17 01:24 UTC. Universe: 12 tokenized stocks with a fresh Chainlink NAV out of 377 listed tokens (365 excluded: no NAV or stale NAV \u2014 never priced from invented data). Top research scores (0-100; momentum 40%, dividend multiplier 20%, adoption 20%, freshness 20%): SPCXc 67.3, NVDAc 65.0, GOOGLc 60.8. Target portfolio (8 holdings, 30% cap, 5% min): SPCXc 14.7%, NVDAc 14.2%, GOOGLc 13.3%, AAPLc 12.1%, METAc 11.7%, AMZNc 11.4%, MSTRc 11.3%, TSLAc 11.3%. Drift vs on-chain target: 155 bps (threshold 500 bps). Action: HOLD. No rebalance trigger fired. Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
+  "rationale_hash": "0x98d39b8a3b3451de964e910bbdd54d6fcba708a5a5e2fccd35e7981db43ba0f9",
   "rebalance_reasons": [],
   "scores": {
     "AAPLc": {
-      "adoption": 30.43,
+      "adoption": 28.78,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 53.01,
-      "multiplier": 50.0,
+      "momentum": 47.88,
+      "multiplier": 52.5,
       "notes": [
-        "NAV +0.60% vs earliest snapshot (2026-11-13)",
-        "multiplier 1.0 (no accrual yet)",
+        "NAV -0.42% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0005003893019802 (>1.0 = reinvested distributions)",
         "log10(total_supply) rank in universe",
-        "NAV updated 8.7h ago"
+        "NAV updated 2.4h ago"
       ],
-      "total": 57.29
+      "total": 55.41
     },
     "AMZNc": {
-      "adoption": 39.24,
+      "adoption": 40.9,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 53.1,
+      "momentum": 35.4,
       "multiplier": 50.0,
       "notes": [
-        "NAV +0.62% vs earliest snapshot (2026-11-13)",
+        "NAV -2.92% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.6h ago"
+        "NAV updated 6.9h ago"
       ],
-      "total": 59.09
+      "total": 52.34
     },
     "CRCLc": {
-      "adoption": 0.33,
-      "excluded_reason": null,
-      "freshness": 100.0,
-      "momentum": 22.79,
-      "multiplier": 50.0,
-      "notes": [
-        "NAV -5.44% vs earliest snapshot (2026-11-13)",
-        "multiplier 1.0 (no accrual yet)",
-        "log10(total_supply) rank in universe",
-        "NAV updated 0.5h ago"
-      ],
-      "total": 39.18
-    },
-    "GOOGLc": {
-      "adoption": 89.06,
-      "excluded_reason": null,
-      "freshness": 100.0,
-      "momentum": 49.75,
-      "multiplier": 51.89,
-      "notes": [
-        "NAV -0.05% vs earliest snapshot (2026-11-13)",
-        "multiplier 1.0003771186767842 (>1.0 = reinvested distributions)",
-        "log10(total_supply) rank in universe",
-        "NAV updated 0.5h ago"
-      ],
-      "total": 68.09
-    },
-    "INTCc": {
       "adoption": 0.0,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 41.87,
+      "momentum": 15.92,
       "multiplier": 50.0,
       "notes": [
-        "NAV -1.63% vs earliest snapshot (2026-11-13)",
+        "NAV -6.82% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.0h ago"
+        "NAV updated 1.9h ago"
       ],
-      "total": 46.75
+      "total": 36.37
+    },
+    "GOOGLc": {
+      "adoption": 86.8,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 32.53,
+      "multiplier": 51.89,
+      "notes": [
+        "NAV -3.49% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0003771186767842 (>1.0 = reinvested distributions)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 5.7h ago"
+      ],
+      "total": 60.75
+    },
+    "INTCc": {
+      "adoption": 2.14,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 10.16,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV -7.97% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.2h ago"
+      ],
+      "total": 34.49
     },
     "METAc": {
-      "adoption": 41.87,
+      "adoption": 39.9,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 51.36,
+      "momentum": 38.46,
       "multiplier": 51.57,
       "notes": [
-        "NAV +0.27% vs earliest snapshot (2026-11-13)",
+        "NAV -2.31% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0003137922895982 (>1.0 = reinvested distributions)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.6h ago"
+        "NAV updated 2.3h ago"
       ],
-      "total": 59.23
+      "total": 53.68
     },
     "MSFTc": {
-      "adoption": 4.01,
+      "adoption": 2.47,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 52.59,
+      "momentum": 48.59,
       "multiplier": 50.0,
       "notes": [
-        "NAV +0.52% vs earliest snapshot (2026-11-13)",
+        "NAV -0.28% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.7h ago"
+        "NAV updated 2.4h ago"
       ],
-      "total": 51.84
+      "total": 49.93
     },
     "MSTRc": {
-      "adoption": 70.48,
+      "adoption": 69.4,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 21.63,
+      "momentum": 19.44,
       "multiplier": 50.0,
       "notes": [
-        "NAV -5.67% vs earliest snapshot (2026-11-13)",
+        "NAV -6.11% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.3h ago"
+        "NAV updated 1.9h ago"
       ],
-      "total": 52.75
+      "total": 51.66
     },
     "NVDAc": {
       "adoption": 100.0,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 54.29,
+      "momentum": 36.14,
       "multiplier": 52.69,
       "notes": [
-        "NAV +0.86% vs earliest snapshot (2026-11-13)",
+        "NAV -2.77% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0005379395763694 (>1.0 = reinvested distributions)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.7h ago"
+        "NAV updated 1.5h ago"
       ],
-      "total": 72.25
+      "total": 64.99
     },
     "SNDKc": {
-      "adoption": 5.19,
+      "adoption": 6.91,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 38.6,
+      "momentum": 19.75,
       "multiplier": 50.0,
       "notes": [
-        "NAV -2.28% vs earliest snapshot (2026-11-13)",
+        "NAV -6.05% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.2h ago"
+        "NAV updated 0.1h ago"
       ],
-      "total": 46.48
+      "total": 39.28
     },
     "SPCXc": {
-      "adoption": 79.36,
+      "adoption": 78.82,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 62.52,
+      "momentum": 53.85,
       "multiplier": 50.0,
       "notes": [
-        "NAV +2.50% vs earliest snapshot (2026-11-13)",
+        "NAV +0.77% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 0.5h ago"
+        "NAV updated 3.7h ago"
       ],
-      "total": 70.88
+      "total": 67.3
     },
     "TSLAc": {
-      "adoption": 32.73,
+      "adoption": 30.7,
       "excluded_reason": null,
       "freshness": 100.0,
-      "momentum": 49.04,
+      "momentum": 38.73,
       "multiplier": 50.0,
       "notes": [
-        "NAV -0.19% vs earliest snapshot (2026-11-13)",
+        "NAV -2.25% vs earliest snapshot (2026-11-13)",
         "multiplier 1.0 (no accrual yet)",
         "log10(total_supply) rank in universe",
-        "NAV updated 4.0h ago"
+        "NAV updated 4.6h ago"
       ],
-      "total": 56.16
+      "total": 51.63
     }
   },
   "target_weights_bps": {
-    "AAPLc": 1155,
-    "AMZNc": 1191,
-    "GOOGLc": 1373,
-    "METAc": 1194,
-    "MSTRc": 1064,
-    "NVDAc": 1462,
-    "SPCXc": 1429,
-    "TSLAc": 1132
+    "AAPLc": 1210,
+    "AMZNc": 1143,
+    "GOOGLc": 1327,
+    "METAc": 1172,
+    "MSTRc": 1128,
+    "NVDAc": 1419,
+    "SPCXc": 1474,
+    "TSLAc": 1127
   },
-  "tickers_csv": "NVDAc,SPCXc,GOOGLc,METAc,AMZNc,AAPLc,TSLAc,MSTRc",
-  "timestamp": "2026-11-16T09:42:59.405151+00:00",
+  "tickers_csv": "SPCXc,NVDAc,GOOGLc,AAPLc,METAc,AMZNc,MSTRc,TSLAc",
+  "timestamp": "2026-11-17T01:24:44.146002+00:00",
   "tx_hash": null,
   "tx_status": "not needed",
   "universe_changed": false,
   "weights_bps": [
-    1462,
-    1429,
-    1373,
-    1194,
-    1191,
-    1155,
-    1132,
-    1064
+    1474,
+    1419,
+    1327,
+    1210,
+    1172,
+    1143,
+    1128,
+    1127
   ]
 }
