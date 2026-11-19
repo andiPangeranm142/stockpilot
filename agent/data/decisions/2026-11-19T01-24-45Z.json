@@ -1,0 +1,659 @@
+{
+  "contract_address": "0x13612a2571C091625db489458298a31c507F54a1",
+  "contract_error": null,
+  "data": {
+    "excluded_count": 77,
+    "excluded_tokens": [
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "APPc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "AMDc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SANc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SKHYc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "PFEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SOUNc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BRK.Bc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "MRKc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "HTZc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "ARMc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NIOc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "ORCLc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "LRCXc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "ULc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "MPc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "RIVNc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SOFIc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "DJTc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "HIMSc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "WENc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "PYPLc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BIRDc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "QCOMc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NFLXc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NOKc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "RBLXc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "VALEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "CRMc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "RDDTc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "HOODc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "CBRSc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "GMEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "VSTc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "PLTRc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NVOc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "PMc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "WDCc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "JNJc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "PTONc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "LULUc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SONYc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "DUOLc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "ASTSc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "VRTc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "UNHc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BUDc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "NVAXc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "PDDc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "QUBTc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BILIc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "AMCc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "AAOIc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BIDUc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "MCDc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "LIc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "SAPc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "GTLBc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "MRNAc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BACc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "CMGc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "ANETc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "WRDc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "RKLBc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "BMNRc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "MRVLc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "LITEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "CRWVc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "LLYc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "CAKEc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "HSAIc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "INFYc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "TTWOc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "AVGOc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "MUc"
+      },
+      {
+        "reason": "missing nav_price (no Chainlink NAV published)",
+        "symbol": "KOc"
+      }
+    ],
+    "snapshot": [
+      {
+        "contract_address": "0xB20000000000000000000019f6E7C675b73C2e4D",
+        "multiplier": "1",
+        "nav_price": "53.81600792",
+        "nav_updated_at": "2026-11-19T01:23:59+00:00",
+        "source": "api",
+        "symbol": "CRCLc",
+        "total_supply": "2799.12117086"
+      },
+      {
+        "contract_address": "0xb2000000000000000000001e800a7f5189430cD0",
+        "multiplier": "1",
+        "nav_price": "386.61",
+        "nav_updated_at": "2026-11-19T00:51:15+00:00",
+        "source": "api",
+        "symbol": "TSLAc",
+        "total_supply": "6338.06260755"
+      },
+      {
+        "contract_address": "0xb2000000000000000000002D0BA3164cc74f58B7",
+        "multiplier": "1.0003771186767842",
+        "nav_price": "286.17388083",
+        "nav_updated_at": "2026-11-18T23:35:43+00:00",
+        "source": "api",
+        "symbol": "GOOGLc",
+        "total_supply": "36305.65772508"
+      },
+      {
+        "contract_address": "0xb200000000000000000000397293Cb8cda9a10c5",
+        "multiplier": "1",
+        "nav_price": "785.49459922",
+        "nav_updated_at": "2026-11-19T01:21:04+00:00",
+        "source": "api",
+        "symbol": "SNDKc",
+        "total_supply": "3108.03853669"
+      },
+      {
+        "contract_address": "0xb2000000000000000000004884b426556b92883d",
+        "multiplier": "1",
+        "nav_price": "91.82687799",
+        "nav_updated_at": "2026-11-19T01:21:06+00:00",
+        "source": "api",
+        "symbol": "MSTRc",
+        "total_supply": "22573.97804302"
+      },
+      {
+        "contract_address": "0xB2000000000000000000004AFF16039bA04bdFBc",
+        "multiplier": "1",
+        "nav_price": "55.52224755",
+        "nav_updated_at": "2026-11-19T01:24:22+00:00",
+        "source": "api",
+        "symbol": "INTCc",
+        "total_supply": "2577.62799796"
+      },
+      {
+        "contract_address": "0xb20000000000000000000078ee7ce2fE4908108C",
+        "multiplier": "1.0005379395763694",
+        "nav_price": "152.23184749",
+        "nav_updated_at": "2026-11-18T23:27:30+00:00",
+        "source": "api",
+        "symbol": "NVDAc",
+        "total_supply": "55760.10508015"
+      },
+      {
+        "contract_address": "0xb2000000000000000000007b9fcbd005511aCBd5",
+        "multiplier": "1",
+        "nav_price": "144.525",
+        "nav_updated_at": "2026-11-18T23:25:26+00:00",
+        "source": "api",
+        "symbol": "SPCXc",
+        "total_supply": "27527.33360566"
+      },
+      {
+        "contract_address": "0xb2000000000000000000008bC8786B856E61707C",
+        "multiplier": "1.0003137922895982",
+        "nav_price": "621.71002661",
+        "nav_updated_at": "2026-11-19T00:49:17+00:00",
+        "source": "api",
+        "symbol": "METAc",
+        "total_supply": "8860.56296839"
+      },
+      {
+        "contract_address": "0xB200000000000000000000Ab99cFa739E253872B",
+        "multiplier": "1",
+        "nav_price": "513.865",
+        "nav_updated_at": "2026-11-19T00:50:34+00:00",
+        "source": "api",
+        "symbol": "MSFTc",
+        "total_supply": "2795.70741505"
+      },
+      {
+        "contract_address": "0xb200000000000000000000C2e324d24d7eEcd1fb",
+        "multiplier": "1.0005003893019802",
+        "nav_price": "354.72441152",
+        "nav_updated_at": "2026-11-19T00:36:58+00:00",
+        "source": "api",
+        "symbol": "AAPLc",
+        "total_supply": "6103.12108319"
+      },
+      {
+        "contract_address": "0xb200000000000000000000d9192b6B456483C2E8",
+        "multiplier": "1",
+        "nav_price": "271.18",
+        "nav_updated_at": "2026-11-19T00:36:50+00:00",
+        "source": "api",
+        "symbol": "AMZNc",
+        "total_supply": "7127.50295316"
+      }
+    ],
+    "sources": {
+      "api": 12,
+      "chainlink": 0
+    },
+    "tokens_seen": 89,
+    "universe_size": 12
+  },
+  "days_since_last_rebalance": 5.03499020503351,
+  "disclaimer": "Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
+  "drift_bps": 1283,
+  "dry_run": false,
+  "first_run": false,
+  "nav_snapshot_hash": "0xb127a467ff1d190c54b0fcad3144b295dc79ab402c9cbdaece1431a699efef64",
+  "needs_rebalance": true,
+  "onchain": {
+    "agent": "0xde897528DEC3E6de4CF52616F7b88c72FA8403eC",
+    "id": 0,
+    "nav_snapshot_hash": "0xe929e1f9bfca1d8cd5608c42ef5db9e7cab6b8f7267560713cf6b9631ed66de9",
+    "rationale_hash": "0xa05a8ee00fb20c5f3b11675a76bc8dcd424c89a3acd6d59ca32cb585584a0b53",
+    "tickers_csv": "NVDAc,GOOGLc,SPCXc,MSTRc,METAc,AMZNc,TSLAc,AAPLc",
+    "timestamp": 1794616462,
+    "weights_bps": [
+      1417,
+      1368,
+      1320,
+      1283,
+      1181,
+      1164,
+      1138,
+      1129
+    ]
+  },
+  "rationale": "StockPilot rebalance decision \u2014 2026-11-19 01:24 UTC. Universe: 12 tokenized stocks with a fresh Chainlink NAV out of 89 listed tokens (77 excluded: no NAV or stale NAV \u2014 never priced from invented data). Top research scores (0-100; momentum 40%, dividend multiplier 20%, adoption 20%, freshness 20%): SPCXc 77.1, GOOGLc 61.7, AMZNc 60.9. Target portfolio (8 holdings, 30% cap, 5% min): SPCXc 16.4%, GOOGLc 13.1%, AMZNc 12.9%, NVDAc 12.7%, AAPLc 11.8%, TSLAc 11.7%, METAc 11.3%, MSFTc 10.0%. Drift vs on-chain target: 1283 bps (threshold 500 bps). Action: REBALANCE. Reasons: drift 1283 bps exceeds 500 bps threshold; universe changed vs on-chain target. Paper-portfolio simulation for the StockPilot hackathon project. Not investment advice. No real assets are bought or sold; NAV values are Chainlink reference values, not live bid/ask prices.",
+  "rationale_hash": "0x90854ae6dc4d849ddf260143051b407238a00ebb76f7501e0c74acc94b100f2b",
+  "rebalance_reasons": [
+    "drift 1283 bps exceeds 500 bps threshold",
+    "universe changed vs on-chain target"
+  ],
+  "scores": {
+    "AAPLc": {
+      "adoption": 28.04,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 48.79,
+      "multiplier": 52.5,
+      "notes": [
+        "NAV -0.24% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0005003893019802 (>1.0 = reinvested distributions)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.8h ago"
+      ],
+      "total": 55.62
+    },
+    "AMZNc": {
+      "adoption": 33.08,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 60.8,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV +2.16% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.8h ago"
+      ],
+      "total": 60.94
+    },
+    "CRCLc": {
+      "adoption": 2.68,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 0.0,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV -12.57% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.0h ago"
+      ],
+      "total": 30.54
+    },
+    "GOOGLc": {
+      "adoption": 86.04,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 35.22,
+      "multiplier": 51.89,
+      "notes": [
+        "NAV -2.96% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0003771186767842 (>1.0 = reinvested distributions)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 1.8h ago"
+      ],
+      "total": 61.67
+    },
+    "INTCc": {
+      "adoption": 0.0,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 22.41,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV -5.52% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.0h ago"
+      ],
+      "total": 38.96
+    },
+    "METAc": {
+      "adoption": 40.16,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 36.82,
+      "multiplier": 51.57,
+      "notes": [
+        "NAV -2.64% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0003137922895982 (>1.0 = reinvested distributions)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.6h ago"
+      ],
+      "total": 53.07
+    },
+    "MSFTc": {
+      "adoption": 2.64,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 41.83,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV -1.63% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.6h ago"
+      ],
+      "total": 47.26
+    },
+    "MSTRc": {
+      "adoption": 70.59,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 0.0,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV -16.18% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.1h ago"
+      ],
+      "total": 44.12
+    },
+    "NVDAc": {
+      "adoption": 100.0,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 23.46,
+      "multiplier": 52.69,
+      "notes": [
+        "NAV -5.31% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0005379395763694 (>1.0 = reinvested distributions)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 2.0h ago"
+      ],
+      "total": 59.92
+    },
+    "SNDKc": {
+      "adoption": 6.09,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 3.08,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV -9.38% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.1h ago"
+      ],
+      "total": 32.45
+    },
+    "SPCXc": {
+      "adoption": 77.04,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 79.24,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV +5.85% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 2.0h ago"
+      ],
+      "total": 77.1
+    },
+    "TSLAc": {
+      "adoption": 29.27,
+      "excluded_reason": null,
+      "freshness": 100.0,
+      "momentum": 48.47,
+      "multiplier": 50.0,
+      "notes": [
+        "NAV -0.31% vs earliest snapshot (2026-11-13)",
+        "multiplier 1.0 (no accrual yet)",
+        "log10(total_supply) rank in universe",
+        "NAV updated 0.6h ago"
+      ],
+      "total": 55.24
+    }
+  },
+  "target_weights_bps": {
+    "AAPLc": 1181,
+    "AMZNc": 1294,
+    "GOOGLc": 1309,
+    "METAc": 1127,
+    "MSFTc": 1003,
+    "NVDAc": 1272,
+    "SPCXc": 1641,
+    "TSLAc": 1173
+  },
+  "tickers_csv": "SPCXc,GOOGLc,AMZNc,NVDAc,AAPLc,TSLAc,METAc,MSFTc",
+  "timestamp": "2026-11-19T01:24:45.153715+00:00",
+  "tx_hash": "0x0f96e5bde40ef83ee81db6e113eaa01037b648d53c4f16122c05805a6971ae82",
+  "tx_status": "confirmed",
+  "universe_changed": true,
+  "weights_bps": [
+    1641,
+    1309,
+    1294,
+    1272,
+    1181,
+    1173,
+    1127,
+    1003
+  ]
+}
