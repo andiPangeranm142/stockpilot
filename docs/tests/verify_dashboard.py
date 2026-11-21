@@ -87,12 +87,35 @@ def expected_values():
         print("WARNING: cast unavailable or getLatest failed — "
               "on-chain weight checks will be skipped")
         holdings = sorted(prices)
+    # On-chain rebalance count (drives the stat strip + history timeline).
+    count = None
+    if os.path.exists(cast):
+        out = subprocess.run(
+            [cast, "call", CONTRACT, "rebalanceCount() returns (uint256)",
+             "--rpc-url", "https://sepolia.base.org"],
+            capture_output=True, text=True, timeout=60,
+        )
+        try:
+            count = int(out.stdout.strip(), 0)
+        except ValueError:
+            count = None
+    if count is None:
+        print("WARNING: rebalanceCount unavailable — "
+              "count/history checks will be skipped")
+    # Timeline cap, read from the dashboard itself so the two cannot drift.
+    app_js = open(os.path.join(DOCS, "app.js")).read()
+    m_hist = re.search(r"const MAX_HISTORY = (\d+);", app_js)
+    max_history = int(m_hist.group(1)) if m_hist else 50
     history = json.load(open(os.path.join(DOCS, "data", "history.json")))
     return {
         "prices": prices,
         "weights": weights,
         "holdings": holdings,
         "history": history,
+        "count": count,
+        "universe": decision["data"]["universe_size"],
+        "n_scored": len(decision["data"]["snapshot"]),
+        "max_history": max_history,
     }
 
 
@@ -111,9 +134,14 @@ def run_checks(page, exp, errors):
     print("action-chip:", page.locator("#decision-action").inner_text())
 
     check("rpc connected", "Connected" in page.locator("#rpc-status").inner_text(), failures)
-    check("rebalance count is 1", page.locator("#rebalance-count").inner_text().strip() == "1", failures)
-    check("holdings stat is 8", page.locator("#stat-holdings").inner_text().strip() == "8", failures)
-    check("universe stat is 12", page.locator("#stat-universe").inner_text().strip() == "12", failures)
+    n_hold = len(exp["holdings"])
+    if exp["count"] is not None:
+        check(f"rebalance count is {exp['count']}",
+              page.locator("#rebalance-count").inner_text().strip() == str(exp["count"]), failures)
+    check(f"holdings stat is {n_hold}",
+          page.locator("#stat-holdings").inner_text().strip() == str(n_hold), failures)
+    check(f"universe stat is {exp['universe']}",
+          page.locator("#stat-universe").inner_text().strip() == str(exp["universe"]), failures)
 
     table_text = page.locator("#portfolio-table").inner_text()
     for sym, price in exp["prices"].items():
@@ -123,11 +151,13 @@ def run_checks(page, exp, errors):
         for sym, w in exp["weights"].items():
             check(f"weight {sym} {w} in table", w in table_text, failures)
     check("no 'not available' in portfolio table", "not available" not in table_text, failures)
-    check("donut has 9 circles", page.locator("#donut-svg circle").count() == 9, failures)
-    check("donut legend has 8 items", page.locator("#donut-legend li").count() == 8, failures)
-    check("12 score rows", page.locator("#scores-body tr").count() == 12, failures)
-    check("60 score bars", page.locator("#scores-body .score-bar").count() == 60, failures)
-    check("1 history item", page.locator("#history-list li").count() == 1, failures)
+    check(f"donut has {n_hold + 1} circles", page.locator("#donut-svg circle").count() == n_hold + 1, failures)
+    check(f"donut legend has {n_hold} items", page.locator("#donut-legend li").count() == n_hold, failures)
+    check(f"{exp['n_scored']} score rows", page.locator("#scores-body tr").count() == exp["n_scored"], failures)
+    check(f"{exp['n_scored'] * 5} score bars", page.locator("#scores-body .score-bar").count() == exp["n_scored"] * 5, failures)
+    if exp["count"] is not None:
+        n_hist = min(exp["count"], exp["max_history"])
+        check(f"{n_hist} history items", page.locator("#history-list li").count() == n_hist, failures)
     check("rationale non-empty", page.locator("#decision-rationale").inner_text().strip() != "", failures)
 
     hist = exp["history"]
@@ -139,14 +169,14 @@ def run_checks(page, exp, errors):
     print("score note:", page.locator("#score-chart-note").inner_text())
     check("charts body visible", page.locator("#charts-body").is_visible(), failures)
     check("charts empty message hidden", page.locator("#charts-empty").is_hidden(), failures)
-    check("nav chart has 8 polylines", page.locator("#nav-chart polyline").count() == 8, failures)
+    check(f"nav chart has {n_hold} polylines", page.locator("#nav-chart polyline").count() == n_hold, failures)
     check(f"nav chart has {nav_points} dots",
           page.locator("#nav-chart circle").count() == nav_points, failures)
-    check("score chart has 8 polylines", page.locator("#score-chart polyline").count() == 8, failures)
+    check(f"score chart has {n_hold} polylines", page.locator("#score-chart polyline").count() == n_hold, failures)
     check(f"score chart has {score_points} dots",
           page.locator("#score-chart circle").count() == score_points, failures)
-    check("nav legend has 8 items", page.locator("#nav-legend li").count() == 8, failures)
-    check("score legend has 8 items", page.locator("#score-legend li").count() == 8, failures)
+    check(f"nav legend has {n_hold} items", page.locator("#nav-legend li").count() == n_hold, failures)
+    check(f"score legend has {n_hold} items", page.locator("#score-legend li").count() == n_hold, failures)
     nav_note = page.locator("#nav-chart-note").inner_text()
     check("nav note shows point count",
           f"{len(hist['nav_dates'])} data points" in nav_note, failures)
@@ -238,8 +268,8 @@ def main():
             print("=== MOBILE CHECKS ===")
             mfail = []
             check("mobile: charts body visible", mobile.locator("#charts-body").is_visible(), mfail)
-            check("mobile: nav chart 8 polylines", mobile.locator("#nav-chart polyline").count() == 8, mfail)
-            check("mobile: score chart 8 polylines", mobile.locator("#score-chart polyline").count() == 8, mfail)
+            check(f"mobile: nav chart {len(exp['holdings'])} polylines", mobile.locator("#nav-chart polyline").count() == len(exp["holdings"]), mfail)
+            check(f"mobile: score chart {len(exp['holdings'])} polylines", mobile.locator("#score-chart polyline").count() == len(exp["holdings"]), mfail)
             moverflow = mobile.evaluate("document.documentElement.scrollWidth > window.innerWidth")
             check("mobile: no horizontal overflow", not moverflow, mfail)
             if merrors:
