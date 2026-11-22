@@ -108,3 +108,16 @@
 {"date": "2026-11-21", "nav_price": "489.199", "nav_updated_at": "2026-11-21T00:11:11+00:00", "source": "api", "symbol": "MSFTc"}
 {"date": "2026-11-21", "nav_price": "345.29769685", "nav_updated_at": "2026-11-20T23:12:02+00:00", "source": "api", "symbol": "AAPLc"}
 {"date": "2026-11-21", "nav_price": "250.879", "nav_updated_at": "2026-11-21T00:23:57+00:00", "source": "api", "symbol": "AMZNc"}
+{"date": "2026-11-22", "nav_price": "87.595", "nav_updated_at": "2026-11-21T00:56:41+00:00", "source": "api", "symbol": "ANTc"}
+{"date": "2026-11-22", "nav_price": "48.795", "nav_updated_at": "2026-11-21T00:12:04+00:00", "source": "api", "symbol": "CRCLc"}
+{"date": "2026-11-22", "nav_price": "350.45", "nav_updated_at": "2026-11-20T22:43:49+00:00", "source": "api", "symbol": "TSLAc"}
+{"date": "2026-11-22", "nav_price": "269.71567647", "nav_updated_at": "2026-11-20T21:42:19+00:00", "source": "api", "symbol": "GOOGLc"}
+{"date": "2026-11-22", "nav_price": "649.44", "nav_updated_at": "2026-11-20T23:38:55+00:00", "source": "api", "symbol": "SNDKc"}
+{"date": "2026-11-22", "nav_price": "79.37", "nav_updated_at": "2026-11-21T00:08:11+00:00", "source": "api", "symbol": "MSTRc"}
+{"date": "2026-11-22", "nav_price": "52.915", "nav_updated_at": "2026-11-20T23:50:55+00:00", "source": "api", "symbol": "INTCc"}
+{"date": "2026-11-22", "nav_price": "129.82480034", "nav_updated_at": "2026-11-20T23:42:40+00:00", "source": "api", "symbol": "NVDAc"}
+{"date": "2026-11-22", "nav_price": "129.34", "nav_updated_at": "2026-11-20T21:52:02+00:00", "source": "api", "symbol": "SPCXc"}
+{"date": "2026-11-22", "nav_price": "567.17792022", "nav_updated_at": "2026-11-20T21:15:17+00:00", "source": "api", "symbol": "METAc"}
+{"date": "2026-11-22", "nav_price": "489.199", "nav_updated_at": "2026-11-21T00:11:11+00:00", "source": "api", "symbol": "MSFTc"}
+{"date": "2026-11-22", "nav_price": "345.29769685", "nav_updated_at": "2026-11-20T23:12:02+00:00", "source": "api", "symbol": "AAPLc"}
+{"date": "2026-11-22", "nav_price": "250.879", "nav_updated_at": "2026-11-21T00:23:57+00:00", "source": "api", "symbol": "AMZNc"}
