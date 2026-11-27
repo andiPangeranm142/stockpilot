@@ -173,3 +173,16 @@
 {"date": "2026-11-26", "nav_price": "490.829", "nav_updated_at": "2026-11-25T18:45:22+00:00", "source": "api", "symbol": "MSFTc"}
 {"date": "2026-11-26", "nav_price": "355.08359116", "nav_updated_at": "2026-11-25T21:08:44+00:00", "source": "api", "symbol": "AAPLc"}
 {"date": "2026-11-26", "nav_price": "247.16", "nav_updated_at": "2026-11-26T00:23:25+00:00", "source": "api", "symbol": "AMZNc"}
+{"date": "2026-11-27", "nav_price": "84.11526752", "nav_updated_at": "2026-11-27T01:11:50+00:00", "source": "api", "symbol": "ANTc"}
+{"date": "2026-11-27", "nav_price": "48.79524215", "nav_updated_at": "2026-11-27T01:00:46+00:00", "source": "api", "symbol": "CRCLc"}
+{"date": "2026-11-27", "nav_price": "384.30940081", "nav_updated_at": "2026-11-27T01:12:33+00:00", "source": "api", "symbol": "TSLAc"}
+{"date": "2026-11-27", "nav_price": "275.71819459", "nav_updated_at": "2026-11-27T01:00:20+00:00", "source": "api", "symbol": "GOOGLc"}
+{"date": "2026-11-27", "nav_price": "610.47980424", "nav_updated_at": "2026-11-27T01:14:04+00:00", "source": "api", "symbol": "SNDKc"}
+{"date": "2026-11-27", "nav_price": "81.50829416", "nav_updated_at": "2026-11-27T01:11:49+00:00", "source": "api", "symbol": "MSTRc"}
+{"date": "2026-11-27", "nav_price": "55.34241963", "nav_updated_at": "2026-11-27T01:13:52+00:00", "source": "api", "symbol": "INTCc"}
+{"date": "2026-11-27", "nav_price": "152.07354998", "nav_updated_at": "2026-11-27T01:11:11+00:00", "source": "api", "symbol": "NVDAc"}
+{"date": "2026-11-27", "nav_price": "130.94779475", "nav_updated_at": "2026-11-27T01:14:17+00:00", "source": "api", "symbol": "SPCXc"}
+{"date": "2026-11-27", "nav_price": "616.47306682", "nav_updated_at": "2026-11-27T01:21:10+00:00", "source": "api", "symbol": "METAc"}
+{"date": "2026-11-27", "nav_price": "493.01122468", "nav_updated_at": "2026-11-27T01:00:32+00:00", "source": "api", "symbol": "MSFTc"}
+{"date": "2026-11-27", "nav_price": "356.59834875", "nav_updated_at": "2026-11-27T01:00:20+00:00", "source": "api", "symbol": "AAPLc"}
+{"date": "2026-11-27", "nav_price": "246.76950479", "nav_updated_at": "2026-11-27T01:00:40+00:00", "source": "api", "symbol": "AMZNc"}
